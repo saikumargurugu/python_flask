@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+  {% block content %}
+  <table border="1px" >
+    <tr><th>sno</th><th>uname</th><th>phnp</th><th>email</th><th>Add/Remove</th></tr>  
+    {% for d in l %}
+      <tr>
+      <th>{{d.sno}}</th>
+      <td>{{d.uname}}</td>
+      <td>{{d.phno}}</td>
+      <td>{{d.email}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+          
+  {% endblock content %}
