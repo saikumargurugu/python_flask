@@ -36,7 +36,6 @@ if choice == 2:
 if choice== 3:
     cursor.execute("""select * FROM userdataa""")
     connection.commit()
-    row_headers=[x[0] for x in cursor.description]
     d=cursor.fetchall()
     l=[]
     g={}

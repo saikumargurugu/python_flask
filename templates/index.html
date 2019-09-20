@@ -1,13 +1,19 @@
 {% extends "layout.html" %}
   {% block content %}
   <table border="1px" >
-    <tr><th>sno</th><th>uname</th><th>phnp</th><th>email</th><th>Add/Remove</th></tr>  
+    <tr><th>sno</th><th>uname</th><th>mobile</th><th>email</th><th>Add/Remove</th></tr>  
     {% for d in l %}
       <tr>
-      <th>{{d.sno}}</th>
+      <th>s={{d.sno}}</th>
       <td>{{d.uname}}</td>
       <td>{{d.phno}}</td>
       <td>{{d.email}}</td>
+      <td><button> 
+          <form method="POST" action="">
+            {{form.s}}
+            {{form.Remove}}
+      <a href="{{url_for('hello_name')}}">removeuser</a></button>  </td>
+          </form>
       </tr>
       {% endfor %}
   </table>

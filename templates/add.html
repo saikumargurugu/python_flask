@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+  {% block content %}
+  <div clsas="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div>
+                <table>
+                    <td>name: {{ form.uname}}</td>
+                    <td>email: {{ form.email}}</td>
+                    <td>phno: {{ form.phno}}</td>
+                </table>
+               
+            </div>
+        </fieldset>
+        <div>
+            {{form.add}}
+        </div>
+    </form>
+    <div>
+        <small>
+                abort? <a href="{{url_for('hello_name')}}"> clicl here </a>
+        </small>
+    </div>
+  </div>
+  
+  {% endblock content %}
