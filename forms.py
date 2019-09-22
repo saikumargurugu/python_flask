@@ -17,7 +17,6 @@ class RemoveUser(FlaskForm):
 
 
 class UpdateUser(FlaskForm):
-    sno= IntegerField('sno',validators=[DataRequired(),Length(10)])
     uname=StringField('uname', validators=[Length(min=2, max=20)])
     email=StringField('email', validators=[Email()])
     phno= IntegerField('phno',validators=[Length(10)])

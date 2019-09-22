@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
   {% block content %}
-  <table border="1px" >
-    <tr><th>sno</th><th>uname</th><th>mobile</th><th>email</th><th>Add/Remove</th></tr>  
+  <div style="overflow-x:auto;">
+    <br><br>
+  <table calss="tabe" >
+    <tr class="th"><th>sno</th><th>uname</th><th>mobile</th><th>email</th><th>Add/Remove</th></tr>  
     {% for d in l %}
-      <tr>
-      <th>s={{d.sno}}</th>
-      <td>{{d.uname}}</td>
-      <td>{{d.phno}}</td>
-      <td>{{d.email}}</td>
-      <td><button> 
-          <form method="POST" action="">
-            {{form.s}}
-            {{form.Remove}}
-      <a href="{{url_for('hello_name')}}">removeuser</a></button>  </td>
-          </form>
+      <tr class="tab">
+      <td class="tab">{{d.sno}}</td>
+      <td class="tab">{{d.uname}}</td>
+      <td class="tab">{{d.phno}}</td>
+      <td class="tab">{{d.email}}</td>
+      <td>
+              <a href="/delet/{{ d.sno}}" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+              <a href="/upuser/{{ d.sno}}">update</a>
+              </td>
       </tr>
       {% endfor %}
   </table>
-          
+</div>
   {% endblock content %}
