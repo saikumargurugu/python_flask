@@ -6,7 +6,7 @@ connection = psycopg2.connect(user="postgres",
                             port="5432",
                             database="userinfo")
 cursor = connection.cursor()
-choice=int(input("select your option \n 1. add \n 2. delet \n 3. view \n 4. update \n"))
+choice=int(input("select your option \n 1. add \n 2. delet \n 3. view \n 4. update \n 5. authenticate \n"))
 if choice ==1:
     uname = input("enter name:")
     phno = input("enter mobile no:")
@@ -74,4 +74,17 @@ if choice== 4:
             connection.commit()
         else:
             print("Please enter correct email id")
-    
+
+if choice==5:
+    u=input("enter id")
+    p=int(input("enter id"))
+    cursor.execute("""SELECT phno FROM userdataa WHERE sno = %s;""" ,u,)
+    d=cursor.fetchall()
+    connection.commit()
+    k=[]
+    k=list(d[0])
+    print(k)
+    print(type(p))
+    print(type(k[0]))
+    if p == k[0]:
+        print("done")
