@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask,url_for,render_template, request, redirect, flash
+from flask import Flask,url_for,render_template, request, redirect, flash,session,g
 from forms import AddDataForm,RemoveUser,UpdateUser
 import os
 
@@ -17,17 +17,49 @@ connection = psycopg2.connect(user="postgres",
                             port="5432",
                             database="userinfo")
 cursor = connection.cursor()
+
+@app.before_request
+def before_request():
+   g.users=None
+   if 'users' in session:
+      g.users=session['users']
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+   if request.method== 'POST':
+      session.pop('users', None)
+      cursor.execute( """ SELECT phno FROM userdataa WHERE sno = %s;""" , request.form['username'])
+      d=cursor.fetchall()
+      connection.commit()
+      k=(d[0]) 
+      print(k[0])
+      print(request.form['password'])
+      if str(request.form['password']) in k:
+         print(request.form['password'])
+         session['users']=request.form['username']
+         return redirect(url_for('hello_name'))
+   return render_template('login.html')
+
+
+
 @app.route('/hello', methods=['GET','POST'])
 def hello_name():
-   form= RemoveUser()
-   cursor.execute("""select * FROM userdataa""")
-   d=cursor.fetchall()
-   connection.commit()
-   l=[]
-   for row in d:
-      g={'sno': row[0], 'uname': row[1], 'phno': row[2],'email':row[3]}
-      l.append(g)
-   return render_template('index.html',form=form, l=l)
+   if g.users:
+      form= RemoveUser()
+      cursor.execute("""select * FROM userdataa""")
+      d=cursor.fetchall()
+      connection.commit()
+      l=[]
+      for row in d:
+         s={'sno': row[0], 'uname': row[1], 'phno': row[2],'email':row[3]}
+         l.append(s)
+      return render_template('index.html',form=form, l=l)
+   else:
+      return redirect(url_for('login'))
+
+
+
+
 @app.route('/adddata', methods=['GET','POST'])
 def adddata():
    form = AddDataForm()

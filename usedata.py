@@ -1,7 +1,7 @@
 import psycopg2
 
 connection = psycopg2.connect(user="postgres",
-                            password="unosimple",
+                            password="sai81432021",
                             host="localhost",
                             port="5432",
                             database="userinfo")
