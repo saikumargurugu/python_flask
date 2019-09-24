@@ -1,15 +1,19 @@
-<html>
-<head></head>
-<body>
+{% extends "layout.html" %}
+  {% block content %}
 <form method="POST">
     <center>
+        <table class="tablog">
         <br>
         <br>
-enter ID:<input type="text" name="username"><br><br>
-password:<input type="password" name="password">
+<tr><td>enter ID:</td><td><input type="text" name="username"></td></tr>
+<tr><td>password:</td><td><input type="password" name="password"></td></tr>
 <br><br> 
-<input type="submit" value="submit">
+<tr><td><td></td></td></tr>
+<tr>
+<td></td><td align="center"><input type="submit" value="submit"></td></tr>
 </form>
+</tr>
+</table>
 </center>
-</body>
-</html>
+</div>
+{% endblock content %}

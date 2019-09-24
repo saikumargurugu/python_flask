@@ -3,7 +3,7 @@
   <div style="overflow-x:auto;">
     <br><br>
   <table calss="tabe" >
-    <tr class="th"><th>sno</th><th>uname</th><th>mobile</th><th>email</th><th>Add/Remove</th></tr>  
+    <tr class="th" align="center"><th>sno</th><th>uname</th><th>mobile</th><th>email</th><th>Add/Remove</th><th>Add Files Here</th></tr>  
     {% for d in l %}
       <tr class="tab">
       <td class="tab">{{d.sno}}</td>
@@ -14,6 +14,9 @@
               <a href="/delet/{{ d.sno}}" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
               <a href="/upuser/{{ d.sno}}">update</a>
               </td>
+      <td class="upcls" ><form action = "/upload" method = "POST"  enctype = "multipart/form-data">
+        <input type = "file" name = "photo"  class="upbut" ><input type = "submit" class="subtn"  />
+      </td>
       </tr>
       {% endfor %}
   </table>

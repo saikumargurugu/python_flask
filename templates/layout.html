@@ -10,8 +10,26 @@
   .tabe{
       margin-top: 40%;
       margin-bottom: 30px;
-    }
-    
+     }
+.upcls{
+  padding-left: 40px;
+  padding-right: 40px;
+  }
+  .tablog{
+      margin-top: 10%;
+      margin-bottom: 30px;
+  }
+
+  .upbut{
+    font-size: 7pt ;
+    width: 100px;
+   
+  }
+  .subtn{
+    font-size: 7pt ;
+
+    width: 50px;
+  }
   .tab {
   border-collapse: collapse;
   margin-top: 10px;
@@ -32,6 +50,7 @@
   }
  a.hover {background-color: #f5f5f5;}
   .th{
+    border-image-outset: 1px;
     margin-top: 40%;
     margin-bottom: 30px;
   background-color: #4CAF50;
@@ -48,8 +67,9 @@
   <body>
     <center>
        <div style="background-color: rgb(159, 158, 182)" class="d">
-          <a href="{{url_for('hello_name')}}"> <button class="b2">  Home</button></a>
-          <a href="{{url_for('adddata')}}"><button class="b2">AddUser</button></a>
+          <a href="{{url_for('hello_name')}}"> <button class="b2"> Home</button></a>
+          <a href="{{url_for('adddata')}}"><button class="b2">Add User</button></a>
+          <a href="{{url_for('logout')}}"><button class="b2">log out</button></a>
        </div>
     {% with messages = get_flashed_messages(with_categories=true) %}
   {%if messages%}
