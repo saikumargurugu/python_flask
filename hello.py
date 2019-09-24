@@ -3,10 +3,8 @@ from flask import Flask,url_for,render_template, request, redirect, flash,sessio
 from forms import AddDataForm,RemoveUser,UpdateUser
 import os
 from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = '/home/prakash/Desktop/userdata/usimg'
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 SECRET_KEY = os.urandom(32)
@@ -137,19 +135,43 @@ def remove_user(id):
       return redirect(url_for('hello_name'))
    else:
       return redirect(url_for('login'))
+app.config['IMAGE_UPLOADS']="/home/prakash/Desktop/userdata/usimg";
+app.config['ACCECPTED_IMAGE_EXTENSIONS']=["PNG","JPG","JPEG"]
+
+def upload_image(filename):
+   if not "." in filename:
+      flash (f'enter correct file formate(PNG,JPEG,JPG)')
+      return False
+   
+   e= filename.rsplit(".",1)[1]
+   
+   if e.upper() in app.config['ACCECPTED_IMAGE_EXTENSIONS']:
+      print("ee")
+      return True
+   else:
+      print("ii")
+      return False
+
 
 @app.route('/upload', methods = ['GET', 'POST'])
+
 def upload_file():
    if request.method == 'POST':
-      if 'file' not in request.files[file]:
-         flash('No file part')
-         return redirect(url_for('hello_name'))
-      if 'file' in request.files[file]:
-         filer= secure_filename(request.files['file'])
-         file.save(os.path.join(app.config['UPLOAD_FOLDER'],filer))
-         flash('file uploaded successfully')
-         return redirect(url_for('hello_name', file=file))
-   return render_template('index.hrml')
+      if request.files:
+         print("y")
+         image=request.files['photo']
+         if image.filename=="":
+            flash('please add a file name to the image')
+            return redirect(url_for('hello_name'))
+         if upload_image(image.filename) == True:
+            print("y")
+            filename =secure_filename(image.filename)
+            print(type(filename))
+            print(type(app.config['IMAGE_UPLOADS']))
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            print("done")
+            return redirect(url_for('hello_name'))
+   return render_template('index.html')
 
 
 if __name__ == "__main__": 
